@@ -1,10 +1,21 @@
 import { useState } from "react";
 
-function Todo({ id, task }) {
+function Todo({ id, req, todo, setTodo }) {
+  const deleteTodo = (e) => {
+    e.preventDefault();
+
+    const newArr = todo.forEach((todoOb) => {
+      if (todoOb.id === id) {
+        const alteredArray = todo.slice(id);
+      }
+    });
+    return setTodo(newArr);
+  };
+
   return (
     <>
-      <p>{task}</p>
-      <button>DELETE</button>
+      <p>{req}</p>
+      <button onClick={deleteTodo}>DELETE</button>
       <br />
     </>
   );
@@ -13,12 +24,11 @@ function Todo({ id, task }) {
 export default function Solution02() {
   const [text, setText] = useState("");
   const [todo, setTodo] = useState([]);
-  const [id, setId] = useState(0);
+  const [id, setId] = useState(1);
 
   function handleSubmit(e) {
     e.preventDefault();
     setId((prevIdAdd1) => prevIdAdd1 + 1);
-
     let ob = { id: id, task: text };
 
     todo.push(ob);
@@ -37,9 +47,11 @@ export default function Solution02() {
         <textarea value={text} onChange={handleTextChange} />
         <button type="submit">Submit</button>
       </form>
-      {todo.map((info) => (
-        <div key={info.id}>
-          <Todo id={info.id} task={info.task} />
+      {todo?.map((info, index) => (
+        <div key={index}>
+          <Todo id={index} req={info.task} todo={todo} setTodo={setTodo} />
+          {console.log(info)}
+          {console.log(info.task)}
 
           <br />
         </div>
