@@ -1,25 +1,26 @@
 import { useState } from "react";
 
-function Todo({ id, req, todo, setTodo }) {
-  const deleteTodo = (e) => {
-    e.preventDefault();
+// function Todo({ id, req, todo, setTodo }) {
+//   const deleteTodo = (e) => {
+//     const newArr = todo.forEach((todoOb) => {
+//       if (todoOb.id === id) {
+//         // const alteredArray = todo.slice(id);
+//         console.log('newArr');
+//       }
+//     });
+//     // return setTodo(newArr);
+//   };
 
-    const newArr = todo.forEach((todoOb) => {
-      if (todoOb.id === id) {
-        const alteredArray = todo.slice(id);
-      }
-    });
-    return setTodo(newArr);
-  };
+//   return (
+//     <>
+//       <p>{req}</p>
+//       <button onClick={deleteTodo}>DELETE</button>
+//       <br />
+//     </>
+//   );
+// }
 
-  return (
-    <>
-      <p>{req}</p>
-      <button onClick={deleteTodo}>DELETE</button>
-      <br />
-    </>
-  );
-}
+// need to debug Todo component
 
 export default function Solution02() {
   const [text, setText] = useState("");
@@ -50,8 +51,8 @@ export default function Solution02() {
       {todo?.map((info, index) => (
         <div key={index}>
           <Todo id={index} req={info.task} todo={todo} setTodo={setTodo} />
-          {console.log(info)}
-          {console.log(info.task)}
+          {/* {console.log(info)}
+          {console.log(info.task)} */}
 
           <br />
         </div>
