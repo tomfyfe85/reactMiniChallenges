@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+// ask chat gtp to suggest 2 other ways
 function Todo({ id, task, todo, setTodo }) {
   const deleteTodo = () => {
     const filtered = todo.filter((task) => task.id !== id);
