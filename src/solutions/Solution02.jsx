@@ -1,37 +1,38 @@
 import { useState } from "react";
 
-// function Todo({ id, req, todo, setTodo }) {
-//   const deleteTodo = (e) => {
-//     const newArr = todo.forEach((todoOb) => {
-//       if (todoOb.id === id) {
-//         // const alteredArray = todo.slice(id);
-//         console.log('newArr');
-//       }
-//     });
-//     // return setTodo(newArr);
-//   };
+function Todo({ id, task, todo, setTodo }) {
+  const deleteTodo = () => {
+    todo.forEach((object) => {
+      if (id === object.id) {
+        todo.splice(id - 1, 1);
+        const newTodo = todo;
+        console.log(newTodo);
+        setTodo(newTodo);
 
-//   return (
-//     <>
-//       <p>{req}</p>
-//       <button onClick={deleteTodo}>DELETE</button>
-//       <br />
-//     </>
-//   );
-// }
+        return;
+      }
+    });
+  };
+  console.log(todo);
+  return (
+    <>
+      <p>{task}</p>
+      <button onClick={deleteTodo}>DELETE</button>
+    </>
+  );
+}
 
 // need to debug Todo component
 
 export default function Solution02() {
   const [text, setText] = useState("");
   const [todo, setTodo] = useState([]);
-  const [id, setId] = useState(1);
+  const [taskId, setTaskId] = useState(1);
 
   function handleSubmit(e) {
     e.preventDefault();
-    setId((prevIdAdd1) => prevIdAdd1 + 1);
-    let ob = { id: id, task: text };
-
+    setTaskId((prevIdAdd1) => prevIdAdd1 + 1);
+    let ob = { id: taskId, task: text };
     todo.push(ob);
     setTodo(todo); // const newTodos = todo.push(text)
     setText("");
@@ -40,6 +41,7 @@ export default function Solution02() {
   function handleTextChange(e) {
     setText(e.target.value);
   }
+  console.log(todo);
 
   return (
     <div>
@@ -48,21 +50,13 @@ export default function Solution02() {
         <textarea value={text} onChange={handleTextChange} />
         <button type="submit">Submit</button>
       </form>
-      {todo?.map((info, index) => (
-        <div key={index}>
-          <Todo id={index} req={info.task} todo={todo} setTodo={setTodo} />
-          {/* {console.log(info)}
-          {console.log(info.task)} */}
-
-          <br />
+      {todo.map((info, index) => (
+        <div key={info.id}>
+          <Todo id={info.id} task={info.task} todo={todo} setTodo={setTodo} />
         </div>
       ))}
     </div>
   );
 }
 
-// add submit button
-// add input field
-// input field needs state that is updated per event
-// onClick save input as state and create a new todo
-// map through array of todos
+// todo={todo} setTodo={setTodo}
