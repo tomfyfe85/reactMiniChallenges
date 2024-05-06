@@ -2,13 +2,8 @@ import { useState } from "react";
 
 function Todo({ id, task, todo, setTodo }) {
   const deleteTodo = () => {
-    const filtered = todo.filter(checkId);
-
-    function checkId(todos) {
-      return todos.id !== id;
-    }
+    const filtered = todo.filter((task) => task.id !== id);
     setTodo(filtered);
-
   };
   return (
     <>
@@ -18,8 +13,6 @@ function Todo({ id, task, todo, setTodo }) {
   );
 }
 
-// need to debug Todo component
-
 export default function Solution02() {
   const [text, setText] = useState("");
   const [todo, setTodo] = useState([]);
@@ -27,6 +20,9 @@ export default function Solution02() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (text === "") {
+      return;
+    }
     setTaskId((prevIdAdd1) => prevIdAdd1 + 1);
     let ob = { id: taskId, task: text };
     todo.push(ob);
